@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             answerButtons.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (manager.continueQuestion()) {
+                    if (manager.hasNextQuestion()) {
                         manager.updateCurrentQuestion();
                         int selectedTextViewIndex = getIndexWithId(v.getId());
                         boolean result = manager.checkResult(selectedTextViewIndex);

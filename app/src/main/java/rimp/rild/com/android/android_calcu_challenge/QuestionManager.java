@@ -61,10 +61,6 @@ public class QuestionManager {
                 currentQuestion.numberB);
     }
 
-    public boolean continueQuestion() {
-        return currentQuestionIndex < questionNumber;
-    }
-
     public void updateCurrentQuestion() {
         currentQuestion = questionSet.getItem(currentQuestionIndex);
     }
@@ -83,6 +79,10 @@ public class QuestionManager {
 
     public int getAnswerAt(int index) {
         return currentAnsNumberList[index];
+    }
+
+    public boolean hasNextQuestion() {
+        return currentQuestionIndex < questionNumber;
     }
 
     public boolean checkResult(int index) {

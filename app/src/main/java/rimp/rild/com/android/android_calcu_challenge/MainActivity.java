@@ -17,17 +17,12 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private final int ANS_NUMBER = 4;
 
-    int currentQuestionIndex = 0;
-    int questionNumber = 10;
-    int[] currentAnsNumberList = new int[ANS_NUMBER];
-
     List<TextView> answerButtons;
     TextView questionTextView;
     TextView currectAnswerTextView;
     TextView questionCountTextView;
 
-    CalcurationQuestion currentQuestion;
-    CalcurationQuestionSet questionSet;
+    QuestionManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,37 +31,24 @@ public class MainActivity extends AppCompatActivity {
 
         answerButtons = new ArrayList<>();
 
-        initializeQuestionSet();
+        manager = new QuestionManager();
 
         getViews();
         updateAnsNumberTexts();
         setOnClickToAnswerButtons();
         updateDisplayText();
 
-        questionCountTextView.setText((currentQuestionIndex + 1) + "問目");
+        questionCountTextView.setText((manager.currentQuestionIndex + 1) + "問目");
         currectAnswerTextView.setText("Result");
 
     }
 
-    private void initializeQuestionSet() {
-        questionSet = new CalcurationQuestionSet(questionNumber, Difficulty.Easy);
-        currentQuestion = questionSet.getItem(currentQuestionIndex);
-    }
 
-    private void updateQuestion() {
-        if (currentQuestionIndex < questionNumber - 1) {
-            currentQuestionIndex++;
-            currentQuestion = questionSet.getItem(currentQuestionIndex);
-        }
-    }
 
     private void updateDisplayText() {
-        String text = getResources().getString(R.string.item_question_text,
-                currentQuestion.numberA,
-                currentQuestion.operatorChar,
-                currentQuestion.numberB);
+        String text = manager.getQestionText(getResources());
         questionTextView.setText(text);
-        questionCountTextView.setText((currentQuestionIndex + 1) + "問目");
+        questionCountTextView.setText((manager.currentQuestionIndex + 1) + "問目");
     }
 
     private void setResultText(boolean isCorrect) {
@@ -77,27 +59,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setAnsToListFromCurrentQuestion() {
-        int correctAnsIndex = diceroll(4);
-        Log.d("MainActivity", "dice: " + correctAnsIndex);
-        for (int i = 0; i < ANS_NUMBER; i++) {
-            if (correctAnsIndex == i) {
-                currentAnsNumberList[i] = currentQuestion.correctAnswer;
-            } else {
-                currentAnsNumberList[i] = currentQuestion.getIncorrectAns();
-            }
-        }
-    }
-
-    private int diceroll(int maxNumber) {
-        Random random = new Random();
-        return random.nextInt(maxNumber);
-    }
-
     private void updateAnsNumberTexts() {
-        setAnsToListFromCurrentQuestion();
+        manager.updateAnserList();
         for (int i = 0; i < ANS_NUMBER; i++) {
-            answerButtons.get(i).setText(String.valueOf(currentAnsNumberList[i]));
+            answerButtons.get(i).setText(String.valueOf(manager.getAnswerAt(i)));
         }
     }
 
@@ -117,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
             answerButtons.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (currentQuestionIndex < questionNumber) {
-                        currentQuestion = questionSet.getItem(currentQuestionIndex);
+                    if (manager.continueQuestion()) {
+                        manager.updateCurrentQuestion();
                         int selectedTextViewIndex = getIndexWithId(v.getId());
-                        boolean result = currentQuestion.correctAnswer == currentAnsNumberList[selectedTextViewIndex];
+                        boolean result = manager.checkResult(selectedTextViewIndex);
                         setResultText(result);
                         if (result) {
-                            updateQuestion();
-                            questionCountTextView.setText((currentQuestionIndex + 1) + "問目");
+                            manager.updateQuestion();
+                            questionCountTextView.setText((manager.currentQuestionIndex + 1) + "問目");
                             updateAnsNumberTexts();
                             updateDisplayText();
                         }

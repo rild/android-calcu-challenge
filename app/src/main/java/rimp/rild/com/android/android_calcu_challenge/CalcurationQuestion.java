@@ -13,6 +13,8 @@ public class CalcurationQuestion {
     private final int BAFFA_SIZE = 3;
     private final int OPERATOR_VARIATION = 3;
     private final int QUSETION_EASY_MAX = 10;
+    private final int QUSETION_NOMAL_MAX = 20;
+    private final int QUSETION_HARD_MAX = 30;
 
     Difficulty difficulty;
     Operator operator = Operator.Plus;
@@ -33,7 +35,7 @@ public class CalcurationQuestion {
 
         random = new Random();
 
-        setNumbers(random, difficulty);
+        initializeNumbers(random, difficulty);
         setOperator(random);
         setAnswer();
 
@@ -84,16 +86,19 @@ public class CalcurationQuestion {
         }
     }
 
-    private void setNumbers(Random random, Difficulty difficulty) {
+    private void initializeNumbers(Random random, Difficulty difficulty) {
         switch (difficulty) {
             case Easy:
                 numberA = random.nextInt(QUSETION_EASY_MAX);
                 numberB = random.nextInt(QUSETION_EASY_MAX);
-                if (numberB == 0) numberB++;
                 break;
             case Nomal:
+                numberA = random.nextInt(QUSETION_NOMAL_MAX);
+                numberB = random.nextInt(QUSETION_NOMAL_MAX);
                 break;
             case Hard:
+                numberA = random.nextInt(QUSETION_HARD_MAX);
+                numberB = random.nextInt(QUSETION_HARD_MAX);
                 break;
         }
     }

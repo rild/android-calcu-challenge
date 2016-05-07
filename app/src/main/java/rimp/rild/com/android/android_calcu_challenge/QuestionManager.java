@@ -20,11 +20,25 @@ public class QuestionManager {
 
     public QuestionManager() {
         initializeQuestionSet();
-
     }
+
+    public QuestionManager(Difficulty difficulty) {
+        initializeQuestionSet(difficulty);
+    }
+
+    public QuestionManager(int questionNumber, Difficulty difficulty) {
+        initializeQuestionSet(difficulty);
+        this.questionNumber = questionNumber;
+    }
+
 
     private void initializeQuestionSet() {
         questionSet = new CalcurationQuestionSet(questionNumber, Difficulty.Easy);
+        currentQuestion = questionSet.getItem(currentQuestionIndex);
+    }
+
+    private void initializeQuestionSet(Difficulty difficulty) {
+        questionSet = new CalcurationQuestionSet(questionNumber, difficulty);
         currentQuestion = questionSet.getItem(currentQuestionIndex);
     }
 

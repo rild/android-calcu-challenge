@@ -104,7 +104,6 @@ public class CalcurationQuestion {
         } while (hasSameValueInBaffaAs(incorrectAnswer));
         pushToBaffa(incorrectAnswer);
 
-        Log.d("CalcurationQuestion", "1 successfully generated");
         return incorrectAnswer;
     }
 
@@ -128,7 +127,6 @@ public class CalcurationQuestion {
             }
         } while (incAns == correctAnswer);
 
-        Log.d("CalcurationQuestion", "2 successfully generated");
         return incAns;
     }
 
@@ -152,8 +150,9 @@ public class CalcurationQuestion {
 
     private void pushToBaffa(int value) {
         for (int i = BAFFA_SIZE - 1; i > 0; i--) {
-            incorrectAnswerBaffa[i] = incorrectAnswerBaffa[i--];
+            incorrectAnswerBaffa[i] = incorrectAnswerBaffa[i - 1];
         }
         incorrectAnswerBaffa[0] = value;
+        Log.d("CalcurationQuestion", "baffa: " + incorrectAnswerBaffa[0] + ", " + incorrectAnswerBaffa[1] + ", " + incorrectAnswerBaffa[2]);
     }
 }

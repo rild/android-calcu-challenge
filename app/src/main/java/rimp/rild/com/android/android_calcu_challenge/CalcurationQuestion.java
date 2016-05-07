@@ -144,6 +144,7 @@ public class CalcurationQuestion {
     }
 
     private int addJidda() {
+        // create jidda between -1 and 1
         int jidda = diceroll(3) - 1;
         return jidda;
     }

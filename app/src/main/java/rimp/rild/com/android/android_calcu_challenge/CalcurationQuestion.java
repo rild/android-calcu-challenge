@@ -53,10 +53,10 @@ public class CalcurationQuestion {
             case Times:
                 correctAnswer = numberA * numberB;
                 break;
-            case Divide:
-                //TODO 割り算どうしよう: answer int->float？
-                correctAnswer = numberA / numberB;
-                break;
+//            case Divide:
+//                //TODO 割り算どうしよう: answer int->float？
+//                correctAnswer = numberA / numberB;
+//                break;
         }
 
     }

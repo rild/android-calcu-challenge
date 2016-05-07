@@ -18,10 +18,11 @@
         <TextView
             android:id="@+id/main_count_text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="Hello World!" />
+            android:gravity="center|top"
+            android:text="Hello World!"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/main_question_text"
@@ -29,16 +30,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
-            android:textSize="28sp"
-            android:text="Hello World!" />
+            android:text="Hello World!"
+            android:textSize="42sp" />
 
         <TextView
             android:id="@+id/main_currect_answer_text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="Hello World!" />
+            android:gravity="center|top"
+            android:text="Hello World!"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

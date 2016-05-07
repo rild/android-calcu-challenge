@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextViewAppearance.ClcuChallenge.Small.Inverse" parent="TextAppearance.AppCompat.Small.Inverse"></style>
+
+    <style name="TextAppearance.ClcuChallenge.QestionItem.Source" parent="TextViewAppearance.ClcuChallenge.Small.Inverse">
+        <item name="android:textColor">@color/primary_text_inverse</item>
+        <item name="android:background">@color/primary_item_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">42sp</item>
+    </style>
+
+</resources>
